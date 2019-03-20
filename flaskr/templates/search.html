@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Deep Papers 2 Recommend</title>
+
+<!-- Favicon -->
+<!--<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}" />-->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!-- For LaTeX rendering -->
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+
+
+<div id ="titdiv">
+
+  <!-- Site information/banner on top left -->
+	<a href="/search">
+	<div id="tittxt">
+		<h1>Deep Papers 2 Recommend</h1>
+	</div>
+	</a>
+</div>
+
+<div id="sbox">
+  <form action="/search" method="get">
+    Enter Search Keywords:<br>
+  	<input name="q" type="text" id="qfield" class="qfield">
+    <input type="submit" value="Submit"/>
+  </form>
+  <div id="search_hint"></div>
+</div>
+<br>
+<div>
+  <p>Below are search results for the query "<b>{{query}}</b>".</p>
+  {% if (searchres | length) == 0: %}  
+    <p>No results found for the entered query.</p>
+  {% endif %}
+  <ol>
+  {% for i in range(toshow): %}
+    <li>
+      <b><a href="/recommend?pindex={{indexref[i][3]}}">{{searchres[i]['title']}}</a></b><br>
+      <i>Authors:</i> {{searchres[i]['authors']}}<br>
+      <i>Abstract:</i> {{searchres[i]['abstract']}}<br>
+      <i>PDF Link:</i> {{searchres[i]['pdf']}}<br>
+    </li>
+    <br>
+  {% endfor %}
+  </ol>
+</div>
+</body>
+
+</html>

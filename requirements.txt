@@ -1,0 +1,6 @@
+flask
+gensim
+scipy
+numpy
+scikit-learn
+bs4

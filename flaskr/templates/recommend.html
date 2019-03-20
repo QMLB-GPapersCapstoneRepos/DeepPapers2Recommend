@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Deep Papers 2 Recommend</title>
+
+<!-- Favicon -->
+<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}" />
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- For LaTeX rendering -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+</head>
+
+<body>
+
+
+<div id ="titdiv">
+
+  <!-- Site information/banner on top left -->
+	<a href="/search">
+	<div id="tittxt">
+		<h1>Deep Papers 2 Recommend</h1>
+	</div>
+	</a>
+</div>
+
+<div id="sbox">
+  <form action="/search" method="get">
+    Enter Search Keywords:<br>
+  	<input name="q" type="text" id="qfield" class="qfield">
+    <input type="submit" value="Submit"/>
+  </form>
+  <div id="search_hint"></div>
+</div>
+<br>
+<div>
+  <p>Below are recommendations for the paper "<b>{{recs[0]['title']}}</b>".</p>
+<ol>
+  {% for i in range(1, toshow+1): %}
+    <li>
+      <b>{{recs[i]['title']}}</b><br>
+      <i>Authors:</i> {{recs[i]['authors']}}<br>
+      <i>Abstract:</i> {{recs[i]['abstract']}}<br>
+      <i>PDF Link:</i> <a href="{{recs[i]['pdf']}}">{{recs[i]['pdf']}}<br></a>
+      <i>Venue:</i> {{recs[i]['venue']}}<br>
+      <i>Similarity Score:</i> {{recs[i]['score']}}
+    </li>
+    <br>
+  {% endfor %}
+</ol>
+</div>
+</body>
+
+</html>
